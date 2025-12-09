@@ -1,32 +1,35 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main {
 
     /**
-     * A phrase is a palindrome if, after converting all uppercase letters into lowercase letters
-     * and removing all non-alphanumeric characters, it reads the same forward and backward.
-     * Alphanumeric characters include letters and numbers.
-     * Given a string s, return true if it is a palindrome, or false otherwise.
+     * Given an array of integers nums and an integer target, return indices of the
+     * two numbers such that they add up to target.
+     * You may assume that each input would have exactly one solution,
+     * and you may not use the same element twice. You can return the answer in any order.
      */
     public static void main(String[] args) {
-        String str1 = "A man, a plan, a canal: Panama";
-        String str2 = "race a car";
-        String str3 = " ";
+        int[] nums = {5, 6, 29, 694, 45, 2, 56, 31};
+        int target = 60;
 
-        boolean result = isPalindrome(str2);
-        System.out.println(result);
+        System.out.println(Arrays.toString(twoSum(nums, target)));
     }
 
-    public static boolean isPalindrome(String str) {
-        if (str != null ) {
 
-            String mod1 = str.replaceAll("[^A-Za-zА-Яа-я]", "");
-            String mod2 = mod1.toLowerCase();
-            String reverseStr = new StringBuilder(mod2).reverse().toString();
+    public static int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
 
-            if (reverseStr.equals(mod2)) {
-                return true;
+        for (int x = 0; x < nums.length; x++) {
+            int nowValue = nums[x];
+            int complement = target - nowValue;
+
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), x};
             }
+            map.put(nowValue, x);
         }
-        return false;
+         return null;
     }
-
 }
