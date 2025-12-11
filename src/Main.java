@@ -1,35 +1,34 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 public class Main {
 
     /**
-     * Given an array of integers nums and an integer target, return indices of the
-     * two numbers such that they add up to target.
-     * You may assume that each input would have exactly one solution,
-     * and you may not use the same element twice. You can return the answer in any order.
+     * You are given two strings word1 and word2.
+     * Merge the strings by adding letters in alternating order, starting with word1.
+     * If a string is longer than the other, append the additional letters onto the end of the merged string.
+     * Return the merged string.
+     * ex
+     * word1:  a   b   c
+     * word2:    p   q   r
+     * merged: a p b q c r
      */
     public static void main(String[] args) {
-        int[] nums = {5, 6, 29, 694, 45, 2, 56, 31};
-        int target = 60;
+        String word1 = "ab", word2 = "pqrs";
 
-        System.out.println(Arrays.toString(twoSum(nums, target)));
+        System.out.println(mergeAlternately(word1, word2));
     }
 
-
-    public static int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<>();
-
-        for (int x = 0; x < nums.length; x++) {
-            int nowValue = nums[x];
-            int complement = target - nowValue;
-
-            if (map.containsKey(complement)) {
-                return new int[]{map.get(complement), x};
+    public static String mergeAlternately(String word1, String word2) {
+        int len1 = word1.length();
+        int len2 = word2.length();
+        int maxLen = Math.max(len1, len2);
+        StringBuilder mergeString = new StringBuilder();
+        for (int i = 0; i < maxLen; i++) {
+            if (i < len1) {
+                mergeString.append(word1.charAt(i)) ;
             }
-            map.put(nowValue, x);
+            if (i < len2) {
+                mergeString.append(word2.charAt(i));
+            }
         }
-         return null;
+        return mergeString.toString();
     }
 }
